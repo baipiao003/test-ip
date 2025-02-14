@@ -10,6 +10,7 @@ achk.cloudflarest.link#KJKKK维护官方优选
 aliyun.2096.us.kg:2096#天诚优选1
 aliyun.2096.us.kg:443#天诚优选2
 cf.877774.xyz#亚洲优选-ipv4
+cloudflare.182682.xyz#cloudflare官方优选
 palera.in#Palera越狱（欧洲优选）
 fbi.gov#美国FBI
 www.wto.org#世界贸易组织（美国优选）
