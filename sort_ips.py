@@ -1,9 +1,12 @@
+import os
+import re
+
 def sort_ips(input_file, output_file, format_str):
     """
     处理IP文件：去重、排序并格式化输出。
     
-    :param input_file: 输入文件名（4.txt 或 6.txt）
-    :param output_file: 输出文件名（ipv4.txt 或 ipv6.txt）
+    :param input_file: 输入文件名
+    :param output_file: 输出文件名
     :param format_str: 输出格式字符串
     """
     try:
@@ -12,10 +15,9 @@ def sort_ips(input_file, output_file, format_str):
             ips = file.readlines()
 
         # 去除空格和换行符，去重，并排序
-        # 使用set去除重复项，然后通过sorted排序
         ips = sorted(set(ip.strip() for ip in ips if ip.strip()))
 
-        # 写入新的文件，格式为 "ip#移动1" 或 "[ip]#移动1"，并添加序号
+        # 写入新的文件，格式化输出并添加序号
         with open(output_file, 'w') as file:
             for index, ip in enumerate(ips, start=1):
                 file.write(format_str.format(ip, index) + "\n")
@@ -26,8 +28,17 @@ def sort_ips(input_file, output_file, format_str):
 
 
 if __name__ == "__main__":
-    # 处理 IPv4 文件
-    sort_ips("4.txt", "ipv4.txt", "{}#移动-洛杉矶{}")  # IPv4格式：ip#移动-洛杉矶1
+    # 定义输入文件和对应的输出文件及格式
+    input_files = [
+        ("4-LAX.txt", "ipv4.txt", "{}#移动-洛杉矶{}"),
+        ("4-HKG.txt", "ipv4.txt", "{}#移动-香港{}"),
+        ("6-LAX.txt", "ipv6.txt", "[{}]#移动-洛杉矶{}"),
+        ("6-HKG.txt", "ipv6.txt", "[{}]#移动-香港{}")
+    ]
 
-    # 处理 IPv6 文件
-    sort_ips("6.txt", "ipv6.txt", "[{}]#移动-洛杉矶{}")  # IPv6格式：[ip]#移动-洛杉矶1
+    # 遍历文件列表，处理每个文件
+    for input_file, output_file, format_str in input_files:
+        if os.path.exists(input_file):  # 检查文件是否存在
+            sort_ips(input_file, output_file, format_str)
+        else:
+            print(f"Skipping {input_file}: File does not exist.")
