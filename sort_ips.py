@@ -27,7 +27,7 @@ def sort_ips(input_file, output_file, format_str):
 
 if __name__ == "__main__":
     # 处理 IPv4 文件
-    sort_ips("4.txt", "ipv4.txt", "{}#移动{}")  # IPv4格式：ip#移动1
+    sort_ips("4.txt", "ipv4.txt", "{}#移动-洛杉矶{}")  # IPv4格式：ip#移动-洛杉矶1
 
     # 处理 IPv6 文件
-    sort_ips("6.txt", "ipv6.txt", "[{}]#移动{}")  # IPv6格式：[ip]#移动1
+    sort_ips("6.txt", "ipv6.txt", "[{}]#移动-洛杉矶{}")  # IPv6格式：[ip]#移动-洛杉矶1
