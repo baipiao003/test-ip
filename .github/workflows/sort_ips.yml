@@ -5,8 +5,8 @@ name: Sort IPs with Python
 on:
   push:  # 推送代码时自动触发
     paths:
-      - '4.txt'  # 只有当4.txt或6.txt文件被推送时才触发
-      - '6.txt'
+      - '4-*.txt'  # 匹配所有以4开头的txt文件
+      - '6-*.txt'  # 匹配所有以6开头的txt文件
   workflow_dispatch:  # 手动触发
     inputs:
       manualTrigger:
@@ -21,7 +21,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # 检出代码，确保4.txt和6.txt文件可用
+      # 检出代码，确保输入文件可用
       - name: Checkout repository
         uses: actions/checkout@v3
 
@@ -41,7 +41,7 @@ jobs:
         run: |
           python sort_ips.py
 
-      # 提交并推送处理后的文件（ipv4.txt和ipv6.txt）
+      # 提交并推送处理后的文件
       - name: Commit and push sorted files
         env:
           GITHUB_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}  # 使用个人访问令牌
