@@ -1,6 +1,21 @@
 import os
 import re
 
+# 名称映射表
+NAME_MAPPING = {
+    "LAX": "洛杉矶",
+    "HKG": "香港"
+}
+
+def get_location_name(filename):
+    """
+    根据文件名中的标识符获取对应的输出名称。
+    """
+    for key, name in NAME_MAPPING.items():
+        if key in filename:
+            return name
+    return "未知"
+
 def sort_ips(input_files, output_file, format_str):
     """
     处理多个IP文件：读取、合并、去重、排序并格式化输出。
@@ -26,7 +41,8 @@ def sort_ips(input_files, output_file, format_str):
         # 写入新的文件，格式化输出并添加序号
         with open(output_file, 'w') as file:
             for index, ip in enumerate(all_ips, start=1):
-                file.write(format_str.format(ip, index) + "\n")
+                location_name = get_location_name(input_files[0])  # 获取第一个文件的地点名称
+                file.write(format_str.format(ip, location_name, index) + "\n")
 
         print(f"IPs sorted, deduplicated, and formatted successfully. Output saved to {output_file}")
     except Exception as e:
@@ -39,6 +55,6 @@ if __name__ == "__main__":
     ipv6_files = ["6-HKG.txt", "6-LAX.txt"]
 
     # 处理 IPv4 文件
-    sort_ips(ipv4_files, "ipv4.txt", "{}#移动-{}")
+    sort_ips(ipv4_files, "ipv4.txt", "{}#移动-{}{}")
     # 处理 IPv6 文件
-    sort_ips(ipv6_files, "ipv6.txt", "[{}]#移动-{}")
+    sort_ips(ipv6_files, "ipv6.txt", "[{}]#移动-{}{}")
