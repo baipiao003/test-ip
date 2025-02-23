@@ -19,7 +19,7 @@ def get_location_name(filename):
 
 def sort_ips(input_files, output_file, format_str):
     """
-    处理多个IP文件：读取、分组、排序并格式化输出。
+    处理多个IP文件：读取、分组、分别排序并格式化输出。
     
     :param input_files: 输入文件列表
     :param output_file: 输出文件名
@@ -45,8 +45,8 @@ def sort_ips(input_files, output_file, format_str):
 
         # 写入新的文件，按分组顺序输出并添加序号
         with open(output_file, 'w') as file:
-            index = 1  # 序号从1开始
             for location in sorted(ip_groups.keys()):  # 按地点名称排序
+                index = 1  # 每个分组的序号从1开始
                 for ip in ip_groups[location]:
                     file.write(format_str.format(ip, location, index) + "\n")
                     index += 1
