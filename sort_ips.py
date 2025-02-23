@@ -41,7 +41,8 @@ def sort_ips(input_files, output_file, format_str):
         # 写入新的文件，格式化输出并添加序号
         with open(output_file, 'w') as file:
             for index, ip in enumerate(all_ips, start=1):
-                location_name = get_location_name(input_files[0])  # 获取第一个文件的地点名称
+                # 获取第一个文件的地点名称
+                location_name = get_location_name(input_files[0])  
                 file.write(format_str.format(ip, location_name, index) + "\n")
 
         print(f"IPs sorted, deduplicated, and formatted successfully. Output saved to {output_file}")
