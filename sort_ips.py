@@ -1,8 +1,7 @@
 import os
-import re
 from collections import defaultdict
 
-# 名称映射表
+# 名称映射表：将文件名中的标识符映射为对应的地点名称
 NAME_MAPPING = {
     "LAX": "洛杉矶",
     "HKG": "香港"
@@ -11,6 +10,7 @@ NAME_MAPPING = {
 def get_location_name(filename):
     """
     根据文件名中的标识符获取对应的输出名称。
+    例如：文件名包含"LAX"时返回"洛杉矶"，包含"HKG"时返回"香港"。
     """
     for key, name in NAME_MAPPING.items():
         if key in filename:
@@ -45,7 +45,7 @@ def sort_ips(input_files, output_file, format_str):
 
         # 写入新的文件，按分组顺序输出并添加序号
         with open(output_file, 'w') as file:
-            index = 1
+            index = 1  # 序号从1开始
             for location in sorted(ip_groups.keys()):  # 按地点名称排序
                 for ip in ip_groups[location]:
                     file.write(format_str.format(ip, location, index) + "\n")
@@ -58,10 +58,10 @@ def sort_ips(input_files, output_file, format_str):
 
 if __name__ == "__main__":
     # 定义输入文件和对应的输出文件及格式
-    ipv4_files = ["4-HKG.txt", "4-LAX.txt"]
-    ipv6_files = ["6-HKG.txt", "6-LAX.txt"]
+    ipv4_files = ["4-HKG.txt", "4-LAX.txt"]  # IPv4文件列表
+    ipv6_files = ["6-HKG.txt", "6-LAX.txt"]  # IPv6文件列表
 
-    # 处理 IPv4 文件
+    # 处理 IPv4 文件，输出到 ipv4.txt
     sort_ips(ipv4_files, "ipv4.txt", "{}#移动-{}{}")
-    # 处理 IPv6 文件
+    # 处理 IPv6 文件，输出到 ipv6.txt
     sort_ips(ipv6_files, "ipv6.txt", "[{}]#移动-{}{}")
