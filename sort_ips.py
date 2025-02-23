@@ -25,24 +25,23 @@ def sort_ips(input_files, output_file, format_str):
     :param format_str: 输出格式字符串
     """
     try:
-        # 读取所有输入文件的内容
+        # 读取所有输入文件的内容，并记录每个IP的来源文件
         all_ips = []
         for input_file in input_files:
             if os.path.exists(input_file):
                 with open(input_file, 'r') as file:
                     ips = file.readlines()
-                all_ips.extend(ips)
+                location_name = get_location_name(input_file)  # 获取当前文件的地点名称
+                all_ips.extend([(ip.strip(), location_name) for ip in ips if ip.strip()])
             else:
                 print(f"Skipping {input_file}: File does not exist.")
 
-        # 去除空格和换行符，去重，并排序
-        all_ips = sorted(set(ip.strip() for ip in all_ips if ip.strip()))
+        # 去除重复的IP地址（基于IP本身去重），并排序
+        all_ips = sorted(set(all_ips))
 
         # 写入新的文件，格式化输出并添加序号
         with open(output_file, 'w') as file:
-            for index, ip in enumerate(all_ips, start=1):
-                # 获取第一个文件的地点名称
-                location_name = get_location_name(input_files[0])  
+            for index, (ip, location_name) in enumerate(all_ips, start=1):
                 file.write(format_str.format(ip, location_name, index) + "\n")
 
         print(f"IPs sorted, deduplicated, and formatted successfully. Output saved to {output_file}")
