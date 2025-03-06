@@ -4,6 +4,7 @@ from collections import defaultdict
 # 名称映射表：将文件名中的标识符映射为对应的地点名称
 NAME_MAPPING = {
     "LAX": "洛杉矶",
+    "NRT": "日本",
     "HKG": "香港"
 }
 
@@ -58,7 +59,7 @@ def sort_ips(input_files, output_file, format_str):
 
 if __name__ == "__main__":
     # 定义输入文件和对应的输出文件及格式
-    ipv4_files = ["4-HKG.txt", "4-LAX.txt"]  # IPv4文件列表
+    ipv4_files = ["4-HKG.txt", "4-NRT.txt", "4-LAX.txt"]  # IPv4文件列表
     ipv6_files = ["6-HKG.txt", "6-LAX.txt"]  # IPv6文件列表
 
     # 处理 IPv4 文件，输出到 ipv4.txt
