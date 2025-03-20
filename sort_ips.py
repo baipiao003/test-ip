@@ -8,6 +8,7 @@ NAME_MAPPING = {
     "SEA": "西雅图",
     "FRA": "法兰克福",
     "NRT": "日本",
+    "SIN": "新加坡",
     "HKG": "香港"
 }
 
@@ -62,7 +63,7 @@ def sort_ips(input_files, output_file, format_str):
 
 if __name__ == "__main__":
     # 定义输入文件和对应的输出文件及格式
-    ipv4_files = ["4-HKG.txt", "4-NRT.txt", "4-FRA.txt", "4-SJC.txt", "4-SEA.txt", "4-LAX.txt"]  # IPv4文件列表
+    ipv4_files = ["4-HKG.txt", "4-NRT.txt", "4-SIN.txt", "4-FRA.txt", "4-SJC.txt", "4-SEA.txt", "4-LAX.txt"]  # IPv4文件列表
     ipv6_files = ["6-HKG.txt", "6-FRA.txt", "6-LAX.txt"]  # IPv6文件列表
 
     # 处理 IPv4 文件，输出到 ipv4.txt
